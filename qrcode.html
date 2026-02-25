@@ -48,9 +48,6 @@
       z-index: 0;
     }
 
-    a { text-decoration: none; color: inherit; }
-
-    /* ─── CARD ─── */
     .card {
       position: relative;
       z-index: 1;
@@ -148,78 +145,36 @@
       letter-spacing: 0.04em;
     }
 
-    /* ─── BOTÕES DE LINK ─── */
-    .links {
+    /* ─── INSTRUÇÃO ─── */
+    .instruction {
       width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 16px;
-    }
-
-    .link-btn {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 20px;
-      border-radius: 2px;
-      border: 1px solid var(--border);
       background: var(--dark2);
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .link-btn:hover {
-      background: var(--dark3);
-      border-color: rgba(201,169,110,0.3);
-      transform: translateY(-1px);
-    }
-
-    .link-btn-gold {
-      background: var(--gold);
-      border-color: var(--gold);
-    }
-
-    .link-btn-gold:hover {
-      background: var(--gold-light);
-      border-color: var(--gold-light);
-    }
-
-    .link-left {
+      border: 1px solid var(--border);
+      border-radius: 2px;
+      padding: 20px 24px;
+      margin-bottom: 16px;
       display: flex;
-      flex-direction: column;
-      gap: 2px;
+      align-items: flex-start;
+      gap: 14px;
     }
 
-    .link-label {
-      font-size: 10px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--white-muted);
+    .instruction-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
     }
 
-    .link-btn-gold .link-label { color: rgba(13,13,13,0.55); }
+    .instruction-text {
+      font-size: 13px;
+      color: var(--white-soft);
+      font-weight: 300;
+      line-height: 1.7;
+    }
 
-    .link-name {
-      font-size: 14px;
-      font-weight: 500;
+    .instruction-text strong {
       color: var(--white);
+      font-weight: 500;
     }
-
-    .link-btn-gold .link-name { color: var(--dark); }
-
-    .link-arrow {
-      font-size: 16px;
-      color: var(--white-muted);
-      transition: transform 0.2s;
-    }
-
-    .link-btn-gold .link-arrow { color: var(--dark); }
-
-    .link-btn:hover .link-arrow { transform: translateX(3px); }
 
     /* ─── BOTÃO DOWNLOAD ─── */
     .btn-download {
@@ -228,23 +183,22 @@
       align-items: center;
       justify-content: space-between;
       padding: 16px 20px;
-      background: transparent;
-      color: var(--white-soft);
+      background: var(--gold);
+      color: var(--dark);
       border-radius: 2px;
-      border: 1px solid var(--border);
+      border: none;
       cursor: pointer;
       font-family: 'Inter', sans-serif;
       font-size: 12px;
-      font-weight: 400;
+      font-weight: 600;
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+      transition: background 0.2s, transform 0.2s;
       margin-bottom: 16px;
     }
 
     .btn-download:hover {
-      background: var(--dark2);
-      border-color: rgba(201,169,110,0.3);
+      background: var(--gold-light);
       transform: translateY(-1px);
     }
 
@@ -301,42 +255,19 @@
     <div class="qr-wrapper">
       <p class="qr-label">Acesse minha página</p>
       <div id="qrcode"></div>
-      <p class="qr-url">rafaelainojosa.netlify.app</p>
+      <p class="qr-url">rafaelainojosa.vercel.app</p>
     </div>
 
-    <!-- BOTÕES DE LINK -->
-    <div class="links">
-
-      <!-- 1. WHATSAPP -->
-      <a href="https://wa.me/554499265665" target="_blank" class="link-btn link-btn-gold">
-        <div class="link-left">
-          <span class="link-label">WhatsApp</span>
-          <span class="link-name">Agendar atendimento</span>
-        </div>
-        <span class="link-arrow">→</span>
-      </a>
-
-      <!-- 2. SITE -->
-      <a href="https://rafaelainojosa.netlify.app/site.html" target="_blank" class="link-btn">
-        <div class="link-left">
-          <span class="link-label">Site</span>
-          <span class="link-name">Conheça meu trabalho</span>
-        </div>
-        <span class="link-arrow">→</span>
-      </a>
-
-      <!-- 3. INSTAGRAM -->
-      <a href="https://www.instagram.com/rafaelainojosa/" target="_blank" class="link-btn">
-        <div class="link-left">
-          <span class="link-label">Instagram</span>
-          <span class="link-name">@rafaelainojosa</span>
-        </div>
-        <span class="link-arrow">→</span>
-      </a>
-
+    <!-- INSTRUÇÃO -->
+    <div class="instruction">
+      <span class="instruction-icon">📷</span>
+      <p class="instruction-text">
+        <strong>Aponte a câmera do celular</strong> para o QR Code
+        e acesse diretamente a página da Dra. Rafaela Inojosa.
+      </p>
     </div>
 
-    <!-- DOWNLOAD QR -->
+    <!-- DOWNLOAD -->
     <button class="btn-download" onclick="downloadQR()">
       Salvar imagem do QR Code
       <span>⬇</span>
@@ -355,9 +286,8 @@
   </div>
 
   <script>
-    // Gerar QR Code
     var qr = new QRCode(document.getElementById('qrcode'), {
-      text: 'https://rafaelainojosa.netlify.app',
+      text: 'https://rafaelainojosa.vercel.app',
       width: 200,
       height: 200,
       colorDark: '#0d0d0d',
@@ -365,12 +295,10 @@
       correctLevel: QRCode.CorrectLevel.H
     });
 
-    // Download do QR Code
     function downloadQR() {
       setTimeout(function() {
         var canvas = document.querySelector('#qrcode canvas');
         var img    = document.querySelector('#qrcode img');
-
         if (canvas) {
           var link = document.createElement('a');
           link.download = 'qrcode-rafaela-inojosa.png';
